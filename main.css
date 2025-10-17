@@ -1,0 +1,110 @@
+:root {
+  color-scheme: light dark;
+  font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  background: radial-gradient(120% 120% at top, #f8fafc, #e2e8f0);
+  color: #0f172a;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: transparent;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.app {
+  margin: 0 auto;
+  max-width: 960px;
+  padding: 4rem 1.5rem 6rem;
+}
+
+.hero {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+.hero input {
+  width: min(480px, 100%);
+  align-self: center;
+  padding: 0.8rem 1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(15, 23, 42, 0.2);
+  font-size: 1rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hero input:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
+}
+
+.course-list {
+  list-style: none;
+  display: grid;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+.course-card {
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 18px;
+  padding: 1.5rem;
+  box-shadow: 0 10px 40px rgba(15, 23, 42, 0.12);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(15, 23, 42, 0.05);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.course-card:hover,
+.course-card:focus-within {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.18);
+  border-color: rgba(37, 99, 235, 0.25);
+}
+
+.course-card h2 {
+  margin: 0;
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #2563eb;
+}
+
+.course-card h3 {
+  margin: 0.35rem 0 0.85rem;
+  font-size: 1.45rem;
+  color: #0f172a;
+}
+
+.course-card p {
+  margin: 0;
+  color: rgba(15, 23, 42, 0.72);
+}
+
+.empty {
+  text-align: center;
+  margin-top: 4rem;
+  color: rgba(15, 23, 42, 0.65);
+}
+
+@media (max-width: 640px) {
+  .app {
+    padding: 3rem 1rem 4rem;
+  }
+
+  .course-card {
+    padding: 1.25rem;
+  }
+}
