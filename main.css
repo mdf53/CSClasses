@@ -2,7 +2,7 @@
   color-scheme: light dark;
   font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   line-height: 1.5;
-  font-weight: 400;
+  font-weight: 300;
   background: radial-gradient(120% 120% at top, #f8fafc, #e2e8f0);
   color: #0f172a;
 }
@@ -36,7 +36,7 @@ body {
 .hero input {
   width: min(480px, 100%);
   align-self: center;
-  padding: 0.8rem 1rem;
+  padding: 0.4rem 1rem;
   border-radius: 999px;
   border: 1px solid rgba(15, 23, 42, 0.2);
   font-size: 1rem;
@@ -52,7 +52,7 @@ body {
 .course-list {
   list-style: none;
   display: grid;
-  gap: 1.5rem;
+  gap: 1rem;
   margin: 0;
   padding: 0;
 }
@@ -69,14 +69,14 @@ body {
 
 .course-card:hover,
 .course-card:focus-within {
-  transform: translateY(-4px);
+  transform: translateY(-2px);
   box-shadow: 0 20px 50px rgba(15, 23, 42, 0.18);
   border-color: rgba(37, 99, 235, 0.25);
 }
 
 .course-card h2 {
   margin: 0;
-  font-size: 1rem;
+  font-size: 1.5rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #2563eb;
@@ -84,7 +84,7 @@ body {
 
 .course-card h3 {
   margin: 0.35rem 0 0.85rem;
-  font-size: 1.45rem;
+  font-size: 1.3rem;
   color: #0f172a;
 }
 
@@ -99,6 +99,45 @@ body {
   color: rgba(15, 23, 42, 0.65);
 }
 
+.course-card summary {
+  display: flex;
+  align-items: center;
+}
+
+.course-card summary::marker {
+  content: "";
+}
+
+.course-card summary::before {
+  content: "▶";
+  display: inline-block;
+  margin-right: 0.5em;
+  transition: transform 0.2s;
+}
+
+.course-card[open] summary::before {
+  transform: rotate(90deg);
+}
+
+.course-card table {
+  width: 100%;              /* full width of container */
+  border-collapse: collapse; /* removes double borders */
+  margin-top: 1em;
+  text-align: center;
+  font-family: sans-serif;
+}
+
+.course-card th,
+.course-card td {
+  border: 1px solid #ccc;   /* light gray border */
+  padding: 8px 12px;
+}
+
+.course-card th {
+  background-color: #f0f0f0;
+  font-weight: bold;
+}
+
 @media (max-width: 640px) {
   .app {
     padding: 3rem 1rem 4rem;
@@ -108,3 +147,5 @@ body {
     padding: 1.25rem;
   }
 }
+
+
