@@ -6,10 +6,10 @@ interface Props {
 
 const CourseCard = (props: Props) => {
     const semesterImages: Record<Semesters, string> = {
-        [Semesters.Winter]: "/images/winter.svg",
-        [Semesters.Summer]: "/images/summer.svg",
-        [Semesters.Spring]: "/images/spring.svg",
-        [Semesters.Fall]: "/images/fall.svg",
+        [Semesters.Winter]: "../../images/winter.svg",
+        [Semesters.Summer]: "../../images/summer.svg",
+        [Semesters.Spring]: "../../images/spring.svg",
+        [Semesters.Fall]: "../../images/fall.svg",
     };
 
     const semesterOrder = [
@@ -43,39 +43,39 @@ const CourseCard = (props: Props) => {
                     <p>{props.course.description}</p>
                     <h3>Availability</h3>
                     <table>
-                    <thead>
-                        <tr>
-                        {Object.keys(props.course.availability).map((year) => (
-                            <th key={year} colSpan={semesterOrder.length}>{year}</th>
-                        ))}
-                        </tr>
-                        <tr>
-                        {Object.keys(props.course.availability).flatMap((year) =>
-                            semesterOrder.map((sem) => (
-                            <th key={`${year}-${sem}`}>{Semesters[sem]}</th>
-                            ))
-                        )}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                        {Object.entries(props.course.availability).flatMap(([year, semesters]) =>
-                            semesterOrder.map((sem) => (
-                            <td key={`${year}-${sem}`} style={{ textAlign: "center" }}>
-                                {semesters.includes(sem) ? (
-                                <img
-                                    src="/images/checkmark.svg"
-                                    alt="Available"
-                                    style={{ width: "20px", height: "20px" }}
-                                />
-                                ) : (
-                                ""
+                        <thead>
+                            <tr>
+                                {Object.keys(props.course.availability).map((year) => (
+                                    <th key={year} colSpan={semesterOrder.length}>{year}</th>
+                                ))}
+                            </tr>
+                            <tr>
+                                {Object.keys(props.course.availability).flatMap((year) =>
+                                    semesterOrder.map((sem) => (
+                                        <th key={`${year}-${sem}`}>{Semesters[sem]}</th>
+                                    ))
                                 )}
-                            </td>
-                            ))
-                        )}
-                        </tr>
-                    </tbody>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                {Object.entries(props.course.availability).flatMap(([year, semesters]) =>
+                                    semesterOrder.map((sem) => (
+                                        <td key={`${year}-${sem}`} style={{ textAlign: "center" }}>
+                                            {semesters.includes(sem) ? (
+                                                <img
+                                                    src="/images/checkmark.svg"
+                                                    alt="Available"
+                                                    style={{ width: "20px", height: "20px" }}
+                                                />
+                                            ) : (
+                                                ""
+                                            )}
+                                        </td>
+                                    ))
+                                )}
+                            </tr>
+                        </tbody>
                     </table>
                 </details>
             </li>
