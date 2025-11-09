@@ -37,7 +37,7 @@ const CourseCard = (props: Props) => {
                                 />
                             ))}
                         </div>
-                        <div className="note">{props.course.requiredForMajor && <p className="required"><em>Required</em></p>}</div>
+                        <div className="note">{props.course.requiredForMajor && <p className="required"><em className="required">*</em></p>}</div>
                     </summary>
                     <p className="update"><em>Last updated: {props.course.lastUpdated}</em></p>
                     <p>{props.course.description}</p>
@@ -77,6 +77,18 @@ const CourseCard = (props: Props) => {
                             </tr>
                         </tbody>
                     </table>
+                    <div>
+                        <h3>Prerequisites</h3>
+                        {props.course.prerequisites.length > 0 ? (
+                            <ul>
+                                {props.course.prerequisites.map((prereq, i) => (
+                                    <li key={i}>{prereq}</li>
+                                ))}
+                            </ul>
+                        ) : (
+                            <p>None</p>
+                        )}
+                    </div>
                 </details>
             </li>
         </div>
