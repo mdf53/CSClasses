@@ -247,3 +247,20 @@ body {
     padding: 1.25rem;
   }
 }
+
+.pill-container {
+  margin-top: .5rem;
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.pill {
+  display: inline-block;
+  padding: 0.25rem 0.6rem;
+  font-size: 0.75rem;
+  border-radius: 9999px; /* full rounded */
+  background: #0047BA;
+  border: 1px solid #ccc;
+  color: #FFFFFF;
+}
