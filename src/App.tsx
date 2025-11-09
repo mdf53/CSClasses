@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { defaultCourses, Semesters } from "./data/Courses";
+import { defaultCourses, Semesters, Emphasis, Topic, Tag } from "./data/Courses";
 import CourseCard from "./components/CourseCard";
 import Filter from "./components/Filter";
 
@@ -7,8 +7,12 @@ const App = () => {
   const [query, setQuery] = useState("");
   const [filters, setFilters] = useState({
     requiredForMajor: null as boolean | null,
+    requiredForMinor: null as boolean | null,
     available: null as boolean | null,
     semester: null as Semesters | null,
+    emphasis: null as Emphasis | null,
+    topic: null as Topic | null,
+    tag: null as Tag | null,
   });
 
   const filteredCourses = useMemo(() => {
@@ -18,16 +22,6 @@ const App = () => {
       // Text search filter
       const haystack = `${course.code} ${course.title} ${course.description}`.toLowerCase();
       if (normalizedQuery && !haystack.includes(normalizedQuery)) {
-        return false;
-      }
-
-      // Required for major filter
-      if (filters.requiredForMajor !== null && course.requiredForMajor !== filters.requiredForMajor) {
-        return false;
-      }
-
-      // Availability filter
-      if (filters.available !== null && course.available !== filters.available) {
         return false;
       }
 
@@ -41,6 +35,31 @@ const App = () => {
         if (!hasCurrentYear) {
           return false;
         }
+      }
+
+      // Emphasis filter
+      if (filters.emphasis !== null) {
+        if (filters.emphasis === Emphasis.Animation && course.requiredForAnimation) {
+          return true;
+        } else if (filters.emphasis === Emphasis.Bio && course.requiredForBio) {
+          return true;
+        } else if (filters.emphasis === Emphasis["Machine Learning"] && course.requiredForML) {
+          return true;
+        } else if (filters.emphasis === Emphasis["Software Engineering"] && course.requiredForSE) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+
+      // Required for major filter
+      if (filters.requiredForMajor !== null && course.requiredForMajor !== filters.requiredForMajor) {
+        return false;
+      }
+
+      // Availability filter
+      if (filters.available !== null && course.available !== filters.available) {
+        return false;
       }
 
       return true;

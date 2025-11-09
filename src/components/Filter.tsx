@@ -6,12 +6,12 @@ type FilterProps = {
     available: boolean | null;
     requiredForMajor: boolean | null;
     requiredForMinor: boolean | null;
-    Emphasis: Emphasis | null;
+    emphasis: Emphasis | null;
     topic: Topic | null;
     tag: Tag | null;
   };
   onFilterChange: (
-    key: "semester" | "available" | "requiredForMajor" | "requiredForMinor" | "Emphasis" | "topic" | "tag",
+    key: "semester" | "available" | "requiredForMajor" | "requiredForMinor" | "emphasis" | "topic" | "tag",
     value: boolean | Semesters | Emphasis | Topic | Tag | null
   ) => void;
 };
@@ -44,10 +44,10 @@ const Filter = ({ filters, onFilterChange }: FilterProps) => {
       <div className="filter-group">
         <h3>Emphasis</h3>
         <select
-          value={filters.Emphasis?.toString() || ""}
+          value={filters.emphasis?.toString() || ""}
           onChange={(e) =>
             onFilterChange(
-              "Emphasis",
+              "emphasis",
               e.target.value ? Number(e.target.value) as Emphasis : null
             )
           }>
