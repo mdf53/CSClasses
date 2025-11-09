@@ -102,17 +102,21 @@ const App = () => {
   }, [query, filters]);
 
   return (
-    <div className="app">
-      <header className="hero">
-        <h1>CS Classes</h1>
-        <p>Explore the Computer Science courses available this term.</p>
-        <input
-          aria-label="Search courses"
-          placeholder="Search by topic, code, or title"
-          value={query}
-          onChange={(event) => setQuery(event.target.value)}
-        />
+    <>
+      <header>
+        <h1>BYU | Computer Science Courses</h1>
       </header>
+
+      <div className="search-bar">
+          <p>Explore the Computer Science courses available withing the upcoming year.</p>
+          <input
+            aria-label="Search courses"
+            placeholder="Search by topic, code, or title"
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+            className="search-input"
+          />
+      </div>
 
       <div className="content">
         <aside className="sidebar">
@@ -136,7 +140,7 @@ const App = () => {
           )}
         </main>
       </div>
-    </div>
+    </>
   );
 };
 
