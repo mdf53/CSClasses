@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { defaultCourses, Semesters, Emphasis, Topic, Tag } from "./data/Courses";
+import { defaultCourses, Semesters, Emphasis, Tag } from "./data/Courses";
 import CourseCard from "./components/CourseCard";
 import Filter from "./components/Filter";
 
@@ -11,7 +11,6 @@ const App = () => {
     available: null as boolean | null,
     semester: null as Semesters | null,
     emphasis: null as Emphasis | null,
-    topic: null as Topic | null,
     tag: null as Tag | null,
   });
 

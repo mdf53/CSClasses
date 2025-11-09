@@ -1,4 +1,4 @@
-import { Semesters, Emphasis, Topic, Tag } from "../data/Courses";
+import { Semesters, Emphasis, Tag } from "../data/Courses";
 
 type FilterProps = {
   filters: {
@@ -7,12 +7,11 @@ type FilterProps = {
     requiredForMajor: boolean | null;
     requiredForMinor: boolean | null;
     emphasis: Emphasis | null;
-    topic: Topic | null;
     tag: Tag | null;
   };
   onFilterChange: (
-    key: "semester" | "available" | "requiredForMajor" | "requiredForMinor" | "emphasis" | "topic" | "tag",
-    value: boolean | Semesters | Emphasis | Topic | Tag | null
+    key: "semester" | "available" | "requiredForMajor" | "requiredForMinor" | "emphasis" | "tag",
+    value: boolean | Semesters | Emphasis | Tag | null
   ) => void;
 };
 
@@ -98,7 +97,7 @@ const Filter = ({ filters, onFilterChange }: FilterProps) => {
         </label>
       </div>
 
-      <div className="filter-group">
+      {/* <div className="filter-group">
         <h3>Topic</h3>
         <select
           value={filters.topic?.toString() || ""}
@@ -117,7 +116,7 @@ const Filter = ({ filters, onFilterChange }: FilterProps) => {
               </option>
             ))}
         </select>
-      </div>
+      </div> */}
 
       <div className="filter-group">
         <h3>Tag</h3>

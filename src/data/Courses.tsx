@@ -35,9 +35,9 @@ export enum Emphasis {
   "Software Engineering",
 }
 
-export enum Topic {
-  "Algorithms",
-}
+// export enum Topic {
+//   "Algorithms",
+// }
 
 export enum Tag {
   "Data Structures",
