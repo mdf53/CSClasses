@@ -67,6 +67,37 @@ const App = () => {
         return false;
       }
 
+      // Topic filter
+      // if (filters.topic !== null && !course.topics.includes(filters.topic)) {
+      //   return false;
+      // }
+
+      // Tag filter
+      if (filters.tag !== null) {
+        if (filters.tag === Tag.Algorithms && !course.tags.includes("algorithms")) {
+          return false;
+        } else if (filters.tag === Tag.Animation && !course.tags.includes("animation")) {
+          return false;
+        } else if (filters.tag === Tag["Programming Languages"] && !course.tags.includes("programming languages")) {
+          return false;
+        } else if (filters.tag === Tag["Data Structures"] && !course.tags.includes("data structures")) {
+          return false;
+        } else if (filters.tag === Tag["Software Engineering"] && !course.tags.includes("software engineering")) {
+          return false;
+        } else if (filters.tag === Tag["Machine Learning"] && !course.tags.includes("machine learning")) {
+          return false;
+        }
+
+        // for (const t of Object.values(Tag) as Tag[]) {
+        //   if (t === filters.tag) {
+        //     if (!course.tags.includes(String(t))) {
+        //       return false;
+        //     }
+        //     break;
+        //   }
+        // }
+      }
+
       return true;
     });
   }, [query, filters]);

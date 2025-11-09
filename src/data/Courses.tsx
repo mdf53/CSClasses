@@ -44,8 +44,8 @@ export enum Tag {
   "Algorithms",
   "Machine Learning",
   "Animation",
-  "Bio",
   "Software Engineering",
+  "Programming Languages",
 }
 
 //Idea for how we store courses. temp so I could make sure everything works
