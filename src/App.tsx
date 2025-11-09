@@ -18,19 +18,25 @@ const App = () => {
     const normalizedQuery = query.trim().toLowerCase();
 
     return defaultCourses.filter((course) => {
-      // Text search filter
-      const haystack = `${course.code} ${course.title} ${course.description}`.toLowerCase();
+      // Text search filter (also looks through tags)
+      const tagText = course.tags.join(" ");
+      const haystack = `${course.code} ${course.title} ${course.description} ${tagText}`.toLowerCase();
       if (normalizedQuery && !haystack.includes(normalizedQuery)) {
         return false;
       }
 
       // Semester filter
       if (filters.semester !== null) {
-        const hasCurrentYear = Object.entries(course.availability).some(([year, semesters]) => {
-          const currentYear = new Date().getFullYear();
-          const [startYear] = year.split('-').map(Number);
-          return startYear === currentYear && semesters.includes(filters.semester as Semesters);
-        });
+        const hasCurrentYear = Object.entries(course.availability).some(
+          ([year, semesters]) => {
+            const currentYear = new Date().getFullYear();
+            const [startYear] = year.split("-").map(Number);
+            return (
+              startYear === currentYear &&
+              semesters.includes(filters.semester as Semesters)
+            );
+          }
+        );
         if (!hasCurrentYear) {
           return false;
         }
@@ -38,13 +44,22 @@ const App = () => {
 
       // Emphasis filter
       if (filters.emphasis !== null) {
-        if (filters.emphasis === Emphasis.Animation && course.requiredForAnimation) {
+        if (
+          filters.emphasis === Emphasis.Animation &&
+          course.requiredForAnimation
+        ) {
           return true;
         } else if (filters.emphasis === Emphasis.Bio && course.requiredForBio) {
           return true;
-        } else if (filters.emphasis === Emphasis["Machine Learning"] && course.requiredForML) {
+        } else if (
+          filters.emphasis === Emphasis["Machine Learning"] &&
+          course.requiredForML
+        ) {
           return true;
-        } else if (filters.emphasis === Emphasis["Software Engineering"] && course.requiredForSE) {
+        } else if (
+          filters.emphasis === Emphasis["Software Engineering"] &&
+          course.requiredForSE
+        ) {
           return true;
         } else {
           return false;
@@ -52,17 +67,26 @@ const App = () => {
       }
 
       // Required for major filter
-      if (filters.requiredForMajor !== null && course.requiredForMajor !== filters.requiredForMajor) {
+      if (
+        filters.requiredForMajor !== null &&
+        course.requiredForMajor !== filters.requiredForMajor
+      ) {
         return false;
       }
 
       // Required for minor filter
-      if (filters.requiredForMinor !== null && course.requiredForMinor !== filters.requiredForMinor) {
+      if (
+        filters.requiredForMinor !== null &&
+        course.requiredForMinor !== filters.requiredForMinor
+      ) {
         return false;
       }
 
       // Availability filter
-      if (filters.available !== null && course.available !== filters.available) {
+      if (
+        filters.available !== null &&
+        course.available !== filters.available
+      ) {
         return false;
       }
 
@@ -73,17 +97,35 @@ const App = () => {
 
       // Tag filter
       if (filters.tag !== null) {
-        if (filters.tag === Tag.Algorithms && !course.tags.includes("algorithms")) {
+        if (
+          filters.tag === Tag.Algorithms &&
+          !course.tags.includes("algorithms")
+        ) {
           return false;
-        } else if (filters.tag === Tag.Animation && !course.tags.includes("animation")) {
+        } else if (
+          filters.tag === Tag.Animation &&
+          !course.tags.includes("animation")
+        ) {
           return false;
-        } else if (filters.tag === Tag["Programming Languages"] && !course.tags.includes("programming languages")) {
+        } else if (
+          filters.tag === Tag["Programming Languages"] &&
+          !course.tags.includes("programming languages")
+        ) {
           return false;
-        } else if (filters.tag === Tag["Data Structures"] && !course.tags.includes("data structures")) {
+        } else if (
+          filters.tag === Tag["Data Structures"] &&
+          !course.tags.includes("data structures")
+        ) {
           return false;
-        } else if (filters.tag === Tag["Software Engineering"] && !course.tags.includes("software engineering")) {
+        } else if (
+          filters.tag === Tag["Software Engineering"] &&
+          !course.tags.includes("software engineering")
+        ) {
           return false;
-        } else if (filters.tag === Tag["Machine Learning"] && !course.tags.includes("machine learning")) {
+        } else if (
+          filters.tag === Tag["Machine Learning"] &&
+          !course.tags.includes("machine learning")
+        ) {
           return false;
         }
 
@@ -108,14 +150,17 @@ const App = () => {
       </header>
 
       <div className="search-bar">
-          <p>Explore the Computer Science courses available withing the upcoming year.</p>
-          <input
-            aria-label="Search courses"
-            placeholder="Search by topic, code, or title"
-            value={query}
-            onChange={(event) => setQuery(event.target.value)}
-            className="search-input"
-          />
+        <p>
+          Explore the Computer Science courses available withing the upcoming
+          year.
+        </p>
+        <input
+          aria-label="Search courses"
+          placeholder="Search by tag, topic, code, or title"
+          value={query}
+          onChange={(event) => setQuery(event.target.value)}
+          className="search-input"
+        />
       </div>
 
       <div className="content">
@@ -130,7 +175,9 @@ const App = () => {
 
         <main>
           {filteredCourses.length === 0 ? (
-            <p className="empty">No courses match your search yet. Try another keyword.</p>
+            <p className="empty">
+              No courses match your search yet. Try another keyword.
+            </p>
           ) : (
             <ul className="course-list">
               {filteredCourses.map((course) => (
