@@ -57,6 +57,11 @@ const App = () => {
         return false;
       }
 
+      // Required for minor filter
+      if (filters.requiredForMinor !== null && course.requiredForMinor !== filters.requiredForMinor) {
+        return false;
+      }
+
       // Availability filter
       if (filters.available !== null && course.available !== filters.available) {
         return false;
