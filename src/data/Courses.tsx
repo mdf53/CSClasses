@@ -28,6 +28,26 @@ export enum Program {
   "Undergraduate",
 }
 
+export enum Emphasis {
+  "Machine Learning",
+  "Animation",
+  "Bio",
+  "Software Engineering",
+}
+
+export enum Topic {
+  "Algorithms",
+}
+
+export enum Tag {
+  "Data Structures",
+  "Algorithms",
+  "Machine Learning",
+  "Animation",
+  "Bio",
+  "Software Engineering",
+}
+
 //Idea for how we store courses. temp so I could make sure everything works
 export const defaultCourses: Course[] = [
   {
