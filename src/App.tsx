@@ -125,7 +125,12 @@ const App = () => {
         } else if (
           filters.tag === Tag["Machine Learning"] &&
           !course.tags.includes("machine learning")
-        ) {
+        )  {
+          return false;
+        } else if (
+          filters.tag === Tag["HCI"] &&
+          !course.tags.includes("HCI")
+        )  {
           return false;
         }
 

@@ -46,6 +46,7 @@ export enum Tag {
   "Animation",
   "Software Engineering",
   "Programming Languages",
+  "HCI"
 }
 
 //Idea for how we store courses. temp so I could make sure everything works
@@ -418,7 +419,7 @@ export const defaultCourses: Course[] = [
       "2026-2027": [Semesters.Fall, Semesters.Winter],
     },
     prerequisites: "CS 260",
-    tags: ["human–computer interaction", "UX design", "prototyping"],
+    tags: ["HCI", "UX design", "prototyping"],
     emphasisRequirement: ["HCI"],
     requiredForMajor: false,
     requiredForMinor: false,
