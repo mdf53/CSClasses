@@ -196,9 +196,23 @@ body {
   color: rgba(15, 23, 42, 0.65);
 }
 
+.course-card details {
+  margin: 0;
+}
+
 .course-card summary {
-  display: flex;
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto auto;
   align-items: center;
+  gap: 0.75rem;
+  padding-left: 1.5rem;
+  min-height: 64px;
+  list-style: none;
+}
+
+.course-card summary::-webkit-details-marker {
+  display: none;
 }
 
 .course-card summary::marker {
@@ -207,13 +221,33 @@ body {
 
 .course-card summary::before {
   content: "▶";
-  display: inline-block;
-  margin-right: 0.5em;
-  transition: transform 0.2s;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: transform 0.2s ease;
+  font-size: 0.9rem;
 }
 
-.course-card[open] summary::before {
-  transform: rotate(90deg);
+.course-card details[open] summary::before {
+  transform: translateY(-50%) rotate(90deg);
+}
+
+.course-card .card-title {
+  margin: 0;
+}
+
+.semester-icons {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.course-card .note {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  min-width: 1.25rem;
 }
 
 .course-card table {
