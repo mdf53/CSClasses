@@ -9,9 +9,9 @@ const App = () => {
     requiredForMajor: null as boolean | null,
     requiredForMinor: null as boolean | null,
     available: null as boolean | null,
-    semester: null as Semesters | null,
-    emphasis: null as Emphasis | null,
-    tag: null as Tag | null,
+    semester: [] as Semesters[],
+    emphasis: [] as Emphasis[],
+    tag: [] as Tag[],
   });
 
   const filteredCourses = useMemo(() => {
@@ -26,42 +26,33 @@ const App = () => {
       }
 
       // Semester filter
-      if (filters.semester !== null) {
-        const hasCurrentYear = Object.entries(course.availability).some(
-          ([year, semesters]) => {
-            const currentYear = new Date().getFullYear();
-            const [startYear] = year.split("-").map(Number);
-            return (
-              startYear === currentYear &&
-              semesters.includes(filters.semester as Semesters)
-            );
+      {
+        const semesterFilter = filters.semester;
+        if (semesterFilter !== null) {
+          const hasCurrentYear = Object.entries(course.availability).some(
+            ([year, semesters]) => {
+              const currentYear = new Date().getFullYear();
+              const [startYear] = year.split("-").map(Number);
+              return (
+                startYear === currentYear &&
+                semesters.some(semester => semesterFilter.includes(semester))
+              );
+            }
+          );
+          if (!hasCurrentYear) {
+            return false;
           }
-        );
-        if (!hasCurrentYear) {
-          return false;
         }
       }
 
       // Emphasis filter
-      if (filters.emphasis !== null) {
-        if (
-          filters.emphasis === Emphasis.Animation &&
-          course.requiredForAnimation
-        ) {
-          return true;
-        } else if (filters.emphasis === Emphasis.Bio && course.requiredForBio) {
-          return true;
-        } else if (
-          filters.emphasis === Emphasis["Machine Learning"] &&
-          course.requiredForML
-        ) {
-          return true;
-        } else if (
-          filters.emphasis === Emphasis["Software Engineering"] &&
-          course.requiredForSE
-        ) {
-          return true;
-        } else {
+      if (filters.emphasis !== null && filters.emphasis.length > 0) {
+        const matchesEmphasis =
+          (filters.emphasis.includes(Emphasis.Animation) && course.requiredForAnimation) ||
+          (filters.emphasis.includes(Emphasis.Bio) && course.requiredForBio) ||
+          (filters.emphasis.includes(Emphasis["Machine Learning"]) && course.requiredForML) ||
+          (filters.emphasis.includes(Emphasis["Software Engineering"]) && course.requiredForSE);
+        if (!matchesEmphasis) {
           return false;
         }
       }
@@ -95,53 +86,22 @@ const App = () => {
       //   return false;
       // }
 
+      const tagMap: Record<Tag, string> = {
+        [Tag.Algorithms]: "algorithms",
+        [Tag.Animation]: "animation",
+        [Tag["Programming Languages"]]: "programming languages",
+        [Tag["Data Structures"]]: "data structures",
+        [Tag["Software Engineering"]]: "software engineering",
+        [Tag["Machine Learning"]]: "machine learning",
+        [Tag["HCI"]]: "HCI",
+      }
+
       // Tag filter
-      if (filters.tag !== null) {
-        if (
-          filters.tag === Tag.Algorithms &&
-          !course.tags.includes("algorithms")
-        ) {
-          return false;
-        } else if (
-          filters.tag === Tag.Animation &&
-          !course.tags.includes("animation")
-        ) {
-          return false;
-        } else if (
-          filters.tag === Tag["Programming Languages"] &&
-          !course.tags.includes("programming languages")
-        ) {
-          return false;
-        } else if (
-          filters.tag === Tag["Data Structures"] &&
-          !course.tags.includes("data structures")
-        ) {
-          return false;
-        } else if (
-          filters.tag === Tag["Software Engineering"] &&
-          !course.tags.includes("software engineering")
-        ) {
-          return false;
-        } else if (
-          filters.tag === Tag["Machine Learning"] &&
-          !course.tags.includes("machine learning")
-        )  {
-          return false;
-        } else if (
-          filters.tag === Tag["HCI"] &&
-          !course.tags.includes("HCI")
-        )  {
+      if (filters.tag !== null && filters.tag.length > 0) {
+        const matchesTag = filters.tag.some((t) => course.tags.includes(tagMap[t]));
+        if (!matchesTag) {
           return false;
         }
-
-        // for (const t of Object.values(Tag) as Tag[]) {
-        //   if (t === filters.tag) {
-        //     if (!course.tags.includes(String(t))) {
-        //       return false;
-        //     }
-        //     break;
-        //   }
-        // }
       }
 
       return true;

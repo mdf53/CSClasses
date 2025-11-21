@@ -2,16 +2,16 @@ import { Semesters, Emphasis, Tag } from "../data/Courses";
 
 type FilterProps = {
   filters: {
-    semester: Semesters | null;
+    semester: Semesters[];
     available: boolean | null;
     requiredForMajor: boolean | null;
     requiredForMinor: boolean | null;
-    emphasis: Emphasis | null;
-    tag: Tag | null;
+    emphasis: Emphasis[];
+    tag: Tag[];
   };
   onFilterChange: (
     key: "semester" | "available" | "requiredForMajor" | "requiredForMinor" | "emphasis" | "tag",
-    value: boolean | Semesters | Emphasis | Tag | null
+    value: boolean | Semesters[] | Emphasis[] | Tag[] | null
   ) => void;
 };
 
@@ -22,13 +22,15 @@ const Filter = ({ filters, onFilterChange }: FilterProps) => {
       <div className="filter-group">
         <h3>Semester</h3>
         <select
-          value={filters.semester?.toString() || ""}
-          onChange={(e) =>
+          multiple
+          value={filters.semester.map(String)}
+          onChange={(e) => {
+            const selected = Array.from(e.target.selectedOptions).map(o => Number(o.value) as Semesters);
             onFilterChange(
               "semester",
-              e.target.value ? Number(e.target.value) as Semesters : null
+              selected
             )
-          }>
+          }}>
           <option value="">Any Semester</option>
           {Object.keys(Semesters)
             .filter((key) => !isNaN(Number(key)))
@@ -43,13 +45,15 @@ const Filter = ({ filters, onFilterChange }: FilterProps) => {
       <div className="filter-group">
         <h3>Emphasis</h3>
         <select
-          value={filters.emphasis?.toString() || ""}
-          onChange={(e) =>
+          multiple
+          value={filters.emphasis.map(String)}
+          onChange={(e) => {
+            const selected = Array.from(e.target.selectedOptions).map(o => Number(o.value) as Emphasis);
             onFilterChange(
               "emphasis",
-              e.target.value ? Number(e.target.value) as Emphasis : null
+              selected
             )
-          }>
+          }}>
           <option value="">Any Emphasis</option>
           {Object.keys(Emphasis)
             .filter((key) => !isNaN(Number(key)))
@@ -97,37 +101,18 @@ const Filter = ({ filters, onFilterChange }: FilterProps) => {
         </label>
       </div>
 
-      {/* <div className="filter-group">
-        <h3>Topic</h3>
-        <select
-          value={filters.topic?.toString() || ""}
-          onChange={(e) =>
-            onFilterChange(
-              "topic",
-              e.target.value ? Number(e.target.value) as Topic : null
-            )
-          }>
-          <option value="">Any Topic</option>
-          {Object.keys(Topic)
-            .filter((key) => !isNaN(Number(key)))
-            .map((topic) => (
-              <option key={topic} value={topic}>
-                {Topic[Number(topic)]}
-              </option>
-            ))}
-        </select>
-      </div> */}
-
       <div className="filter-group">
         <h3>Tag</h3>
         <select
-          value={filters.tag?.toString() || ""}
-          onChange={(e) =>
+          multiple
+          value={filters.tag.map(String)}
+          onChange={(e) => {
+            const selected = Array.from(e.target.selectedOptions).map(o => Number(o.value) as Tag);
             onFilterChange(
               "tag",
-              e.target.value ? Number(e.target.value) as Tag : null
+              selected
             )
-          }>
+          }}>
           <option value="">Any Tag</option>
           {Object.keys(Tag)
             .filter((key) => !isNaN(Number(key)))
@@ -138,7 +123,7 @@ const Filter = ({ filters, onFilterChange }: FilterProps) => {
             ))}
         </select>
       </div>
-    </div>
+    </div >
   );
 };
 
