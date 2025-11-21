@@ -99,8 +99,8 @@ export const defaultCourses: Course[] = [
     description:
       "Introduces low‑level data representation, assembly programming, computer architecture and the memory hierarchy, along with process management and I/O. Students write programs in C and assembly to understand how high‑level code translates to machine execution",
     availability: {
-      "2025-2026": [Semesters.Fall, Semesters.Winter, Semesters.Spring],
-      "2026-2027": [Semesters.Fall, Semesters.Winter, Semesters.Spring],
+      "2025-2026": [Semesters.Fall, Semesters.Winter, Semesters.Spring, Semesters.Summer],
+      "2026-2027": [Semesters.Fall, Semesters.Winter, Semesters.Spring, Semesters.Summer],
     },
     prerequisites: "CS 111",
     tags: ["systems", "C programming", "assembly", "computer architecture"],
@@ -141,8 +141,8 @@ export const defaultCourses: Course[] = [
     description:
       "Introduces formal methods used in computer science including grammars and parsing, propositional and predicate logic, set theory, relations and relational algebra, graphs and graph algorithms",
     availability: {
-      "2025-2026": [Semesters.Fall, Semesters.Winter, Semesters.Spring],
-      "2026-2027": [Semesters.Fall, Semesters.Winter, Semesters.Spring],
+      "2025-2026": [Semesters.Fall, Semesters.Winter, Semesters.Spring, Semesters.Summer],
+      "2026-2027": [Semesters.Fall, Semesters.Winter, Semesters.Spring, Semesters.Summer],
     },
     prerequisites: "CS 235",
     tags: ["discrete math", "logic", "graphs"],
@@ -162,8 +162,8 @@ export const defaultCourses: Course[] = [
     description:
       "Develops object‑oriented software engineering skills. Students learn to design and implement medium‑sized programs, use version control and testing frameworks, and build a network server",
     availability: {
-      "2025-2026": [Semesters.Fall, Semesters.Winter, Semesters.Spring],
-      "2026-2027": [Semesters.Fall, Semesters.Winter, Semesters.Spring],
+      "2025-2026": [Semesters.Fall, Semesters.Winter, Semesters.Spring, Semesters.Summer],
+      "2026-2027": [Semesters.Fall, Semesters.Winter, Semesters.Spring, Semesters.Summer],
     },
     prerequisites: "CS 235",
     tags: ["software engineering", "object‑oriented", "testing"],
