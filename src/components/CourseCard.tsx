@@ -29,6 +29,7 @@ const CourseCard = (props: Props) => {
                         <div className="semester-icons">
                             {props.course.availability["2026-2027"].map((semester, i) => (
                                 <img
+                                className="emoji"
                                     key={i}
                                     src={semesterImages[semester]}
                                     alt={Semesters[semester]}
